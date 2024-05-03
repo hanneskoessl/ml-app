@@ -1,2 +1,2 @@
 # ml-app
-Interactive app to understand machine learning algorithms.
+Interactive streamlit-app to understand machine learning algorithms. Help wanted!
