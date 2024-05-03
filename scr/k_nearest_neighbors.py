@@ -4,29 +4,29 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 def app():
-    # Setzen eines Headers für die Seite
-    st.header("K-Nearest-Neighbor-Algorithmus")
+    # Setting a header for the page
+    st.header("K-nearest neighbor algorithm")
 
     st.markdown("""
-    Diese interaktive Anwendung demonstriert die Funktionsweise des K-Nearest-Neighbors Algorithmus (KNN). Hier kannst du:
+    This interactive application demonstrates how the K-Nearest Neighbors Algorithm (KNN) works. Here you can:
     
-    - **Datenpunkte visualisieren**: Sehe, wie verschiedene Datenpunkte auf einer Ebene verteilt sind.
-    - **Vorhersagen treffen**: Wähle Werte für neue Punkte und bestimme deren Klassen basierend auf den nächstgelegenen Nachbarn.
-    - **Parameter einstellen**: Ändere die Anzahl der Nachbarn und beobachte, wie sich das auf die Klassifizierung auswirkt.
+    - **Visualize data points**: See how different data points are distributed on a layer.
+    - **Make predictions**: Choose values for new points and determine their classes based on nearest neighbors.
+    - **Set parameters**: Change the number of neighbors and see how that affects the classification.
     
-    Nutze die Sliders unten, um die Parameter zu verändern und beobachte, wie das Modell auf deine Eingaben reagiert.
+    Use the sliders below to change the parameters and watch how the model reacts to your input.
     """)
 
-    # Manuell erstellte Daten
+    # Manually created data
     data_points = np.array([[2, 3], [5, 4], [9, 6], [4, 7], [8, 1], [7, 2]])
-    labels = np.array([0, 1, 1, 0, 1, 0])  # Beispiellabels für zwei Klassen
+    labels = np.array([0, 1, 1, 0, 1, 0])  # Example labels for two classes
     
-    # Tabelle anzeigen
+    # Show table
     df = pd.DataFrame(data_points, columns=['X', 'Y'])
     df['Label'] = labels
-    st.write("Datenpunkte:", df)
+    st.write("Data points:", df)
 
-    # Definition der KNN-Funktion
+    # Definition of KNN function
     def knn(data, test_pt, k, labels):
         neighbor_distances_and_indices = []
         for index, example in enumerate(data):
@@ -40,24 +40,24 @@ def app():
         sorted_votes = sorted(class_votes.items(), key=lambda item: item[1], reverse=True)
         return (sorted_votes[0][0], sorted_neighbors)
     
-    # Benutzereingaben für die Klassifizierung
+    # User input for classification
     test_x = st.slider('Test X', min_value=0.0, max_value=10.0, value=5.0, step=0.01)
     test_y = st.slider('Test Y', min_value=0.0, max_value=10.0, value=5.0, step=0.01)
     test_point = np.array([test_x, test_y])
-    k = st.slider('Anzahl der Nachbarn (k)', 1, len(data_points), 3)
+    k = st.slider('Number of neighbors (k)', 1, len(data_points), 3)
 
-    # Klassifikation
+    # Classification
     predicted_class, sorted_neighbors = knn(data_points, test_point, k, labels)
-    st.write(f'Der vorhergesagte Klasse für Punkt {test_point} ist: {predicted_class}')
+    st.write(f'The predicted class by point {test_point} is: {predicted_class}')
     
-    # Visualisierung der Datenpunkte
+    # Visualization of data points
     colors = {0: 'darkorange', 1: 'cornflowerblue', 2: 'lightcoral'}
     fig, ax = plt.subplots()
-    # plot Datenpunkte
+    # plot data points
     for label, df_group in df.groupby('Label'):
         ax.scatter(df_group['X'], df_group['Y'], s=80, color=colors[label], label=f'Klasse {label}', alpha=0.6)  
     ax.scatter(test_point[0], test_point[1], s=120, color=colors[predicted_class])
-    # plot Linien zu den nächten Nachbarn
+    # plot lines to the night neighbors
     for n, neighbors in enumerate(sorted_neighbors):
         x_coords = [test_point[0], data_points[neighbors[1]][0]]
         y_coords = [test_point[1], data_points[neighbors[1]][1]] 
@@ -69,6 +69,6 @@ def app():
     ax.set_ylim([0, 10])
     st.pyplot(fig)
 
-# Führt die App-Funktion aus, wenn dieses Skript direkt aufgerufen wird
+# Executes the app function when this script is called directly
 if __name__ == "__main__":
     app()

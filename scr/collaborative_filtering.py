@@ -2,11 +2,11 @@ import streamlit as st
 import pandas as pd
 
 def app():
-    # Setzen eines Headers für die Seite
+    # Setting a header for the page
     st.header("Kollaboratives Filtern")
 
 
 
-# Führt die App-Funktion aus, wenn dieses Skript direkt aufgerufen wird
+# Executes the app function when this script is called directly
 if __name__ == "__main__":
     app()
