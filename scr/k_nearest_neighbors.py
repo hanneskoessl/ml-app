@@ -10,11 +10,11 @@ def app():
     st.markdown("""
     This interactive application demonstrates how the K-Nearest Neighbors Algorithm (KNN) works. Here you can:
     
-    - **Visualize data points**: See how different data points are distributed on a layer.
-    - **Make predictions**: Choose values for new points and determine their classes based on nearest neighbors.
-    - **Set parameters**: Change the number of neighbors and see how that affects the classification.
+    - **Visualize Data Points**: See how different data points are distributed on a plane.
+    - **Make Predictions**: Choose values for new points and determine their classes based on nearest neighbors.
+    - **Adjust Parameters**: Change the number of neighbors and see how that affects the classification.
     
-    Use the sliders below to change the parameters and watch how the model reacts to your input.
+    Use the sliders below to adjust the parameters and observe how the model responds to your inputs.
     """)
 
     # Manually created data
@@ -53,11 +53,11 @@ def app():
     # Visualization of data points
     colors = {0: 'darkorange', 1: 'cornflowerblue', 2: 'lightcoral'}
     fig, ax = plt.subplots()
-    # plot data points
+    # Plot data points
     for label, df_group in df.groupby('Label'):
         ax.scatter(df_group['X'], df_group['Y'], s=80, color=colors[label], label=f'Klasse {label}', alpha=0.6)  
     ax.scatter(test_point[0], test_point[1], s=120, color=colors[predicted_class])
-    # plot lines to the night neighbors
+    # Plot lines to the nearest neighbors
     for n, neighbors in enumerate(sorted_neighbors):
         x_coords = [test_point[0], data_points[neighbors[1]][0]]
         y_coords = [test_point[1], data_points[neighbors[1]][1]] 
