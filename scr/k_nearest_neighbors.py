@@ -48,7 +48,7 @@ def app():
 
     # Classification
     predicted_class, sorted_neighbors = knn(data_points, test_point, k, labels)
-    st.write(f'The predicted class by point {test_point} is: {predicted_class}')
+    st.write(f'The predicted class for point {test_point} is: {predicted_class}')
     
     # Visualization of data points
     colors = {0: 'darkorange', 1: 'cornflowerblue', 2: 'lightcoral'}
