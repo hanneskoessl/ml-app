@@ -1,8 +1,10 @@
 from matplotlib import widgets
 import streamlit as st
 
+import linear_regression
 import k_nearest_neighbors
-import collaborative_filtering 
+import collaborative_filtering
+ 
 
 # Set a title for the app
 st.title("Machine learning algorithms")
@@ -14,8 +16,9 @@ Welcome to the Machine Learning demo app! Here you can explore different machine
 
 # Define the pages of the app.
 pages = {
-    "1. K-Nearest-Neighbor"         : k_nearest_neighbors,
-    "2. Collaborative filtering"     : collaborative_filtering,
+    "1. Linear Regression"         : linear_regression,
+    "2. K-Nearest-Neighbor"         : k_nearest_neighbors,
+    "3. Collaborative filtering"     : collaborative_filtering,
 }
 
 # Create a sidebar for navigation within the project.
